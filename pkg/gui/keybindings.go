@@ -254,6 +254,13 @@ func (gui *Gui) GetInitialKeybindings() []*Binding {
 			Description: gui.Tr.RunCustomCommand,
 		},
 		{
+			ViewName:    "containers",
+			Key:         'b',
+			Modifier:    gocui.ModNone,
+			Handler:     gui.bulkCommandsMenuHandler(gui.Config.UserConfig.BulkCommands.Containers),
+			Description: gui.Tr.RunBulkCommand,
+		},
+		{
 			ViewName:    "services",
 			Key:         'd',
 			Modifier:    gocui.ModNone,
@@ -317,6 +324,13 @@ func (gui *Gui) GetInitialKeybindings() []*Binding {
 			Description: gui.Tr.RunCustomCommand,
 		},
 		{
+			ViewName:    "services",
+			Key:         'b',
+			Modifier:    gocui.ModNone,
+			Handler:     gui.bulkCommandsMenuHandler(gui.Config.UserConfig.BulkCommands.Services),
+			Description: gui.Tr.RunBulkCommand,
+		},
+		{
 			ViewName:    "images",
 			Key:         '[',
 			Modifier:    gocui.ModNone,
@@ -339,10 +353,24 @@ func (gui *Gui) GetInitialKeybindings() []*Binding {
 		},
 		{
 			ViewName:    "images",
+			Key:         'b',
+			Modifier:    gocui.ModNone,
+			Handler:     gui.bulkCommandsMenuHandler(gui.Config.UserConfig.BulkCommands.Images),
+			Description: gui.Tr.RunBulkCommand,
+		},
+		{
+			ViewName:    "images",
 			Key:         'D',
 			Modifier:    gocui.ModNone,
 			Handler:     gui.handlePruneImages,
 			Description: gui.Tr.PruneImages,
+		},
+		{
+			ViewName:    "images",
+			Key:         'c',
+			Modifier:    gocui.ModNone,
+			Handler:     gui.handleImagesCustomCommand,
+			Description: gui.Tr.RunCustomCommand,
 		},
 		{
 			ViewName:    "volumes",
@@ -371,6 +399,20 @@ func (gui *Gui) GetInitialKeybindings() []*Binding {
 			Modifier:    gocui.ModNone,
 			Handler:     gui.handlePruneVolumes,
 			Description: gui.Tr.PruneVolumes,
+		},
+		{
+			ViewName:    "volumes",
+			Key:         'b',
+			Modifier:    gocui.ModNone,
+			Handler:     gui.bulkCommandsMenuHandler(gui.Config.UserConfig.BulkCommands.Volumes),
+			Description: gui.Tr.RunBulkCommand,
+		},
+		{
+			ViewName:    "volumes",
+			Key:         'c',
+			Modifier:    gocui.ModNone,
+			Handler:     gui.handleVolumesCustomCommand,
+			Description: gui.Tr.RunCustomCommand,
 		},
 		{
 			ViewName:    "main",

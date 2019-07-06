@@ -50,6 +50,10 @@ type UserConfig struct {
 	// those are found in the commands package
 	CustomCommands CustomCommands `yaml:"customCommands,omitempty"`
 
+	// BulkCommands are commands that apply to all items in a panel e.g.
+	// killing all containers, stopping all services, or pruning all images
+	BulkCommands CustomCommands `yaml:"bulkCommands,omitempty"`
+
 	// OS determines what defaults are set for opening files and links
 	OS OSConfig `yaml:"oS,omitempty"`
 
@@ -258,6 +262,12 @@ type CustomCommands struct {
 
 	// Services contains the custom commands for services
 	Services []CustomCommand `yaml:"services,omitempty"`
+
+	// Images contains the custom commands for images
+	Images []CustomCommand `yaml:"images,omitempty"`
+
+	// Volumes contains the custom commands for volumes
+	Volumes []CustomCommand `yaml:"volumes,omitempty"`
 }
 
 // CustomCommand is a template for a command we want to run against a service or
@@ -335,6 +345,70 @@ func GetDefaultConfig() UserConfig {
 				},
 			},
 			Services: []CustomCommand{},
+		},
+		BulkCommands: CustomCommands{
+			Containers: []CustomCommand{
+				{
+					Name:    "stop all containers",
+					Command: `sh -c "docker stop $(docker ps -a -q)"`,
+				},
+				{
+					Name:    "remove all containers",
+					Command: `sh -c "docker rm $(docker ps -a -q)"`,
+				},
+				{
+					Name:    "prune containers",
+					Command: "docker container prune --force",
+				},
+			},
+			Services: []CustomCommand{
+				{
+					Name:    "up",
+					Command: "{{ .DockerCompose }} up -d",
+				},
+				{
+					Name:    "stop",
+					Command: "{{ .DockerCompose }} stop",
+				},
+				{
+					Name:    "pull",
+					Command: "{{ .DockerCompose }} pull",
+					Attach:  true,
+				},
+				{
+					Name:    "build",
+					Command: "{{ .DockerCompose }} build",
+					Attach:  true,
+				},
+				{
+					Name:    "down",
+					Command: "{{ .DockerCompose }} down",
+				},
+				{
+					Name:    "down with volumes",
+					Command: "{{ .DockerCompose }} down --volumes",
+				},
+				{
+					Name:    "down with images",
+					Command: "{{ .DockerCompose }} down --rmi all",
+				},
+				{
+					Name:    "down with volumes and images",
+					Command: "{{ .DockerCompose }} down --volumes --rmi all",
+				},
+			},
+			Images: []CustomCommand{
+				{
+					Name:    "prune unused images",
+					Command: "docker image prune --force",
+				},
+			},
+			Volumes: []CustomCommand{
+				{
+					Name:    "prune unused volumes",
+					Command: "docker volume prune --force",
+				},
+			},
 		},
 		OS: GetPlatformDefaultConfig(),
 		Update: UpdateConfig{

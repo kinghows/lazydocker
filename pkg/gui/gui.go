@@ -392,3 +392,10 @@ func (gui *Gui) initiallyFocusedViewName() string {
 	}
 	return "containers"
 }
+
+func (gui *Gui) bulkCommandsMenuHandler(cmds []config.CustomCommand) func(g *gocui.Gui, v *gocui.View) error {
+	return func(g *gocui.Gui, v *gocui.View) error {
+		commandObject := gui.DockerCommand.NewCommandObject(commands.CommandObject{})
+		return gui.createBulkCommandMenu(cmds, commandObject)
+	}
+}

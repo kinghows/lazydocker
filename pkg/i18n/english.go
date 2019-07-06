@@ -30,6 +30,7 @@ type TranslationSet struct {
 	Donate                     string
 	Cancel                     string
 	CustomCommandTitle         string
+	BulkCommandTitle           string
 	Remove                     string
 	ForceRemove                string
 	RemoveWithVolumes          string
@@ -42,6 +43,7 @@ type TranslationSet struct {
 	StoppingStatus             string
 	RemovingStatus             string
 	RunningCustomCommandStatus string
+	RunningBulkCommandStatus   string
 	RemoveService              string
 	Stop                       string
 	Restart                    string
@@ -75,6 +77,7 @@ type TranslationSet struct {
 	PressEnterToReturn         string
 	ViewRestartOptions         string
 	RunCustomCommand           string
+	RunBulkCommand             string
 
 	LogsTitle                string
 	ConfigTitle              string
@@ -91,6 +94,7 @@ func englishSet() TranslationSet {
 		RestartingStatus:           "restarting",
 		StoppingStatus:             "stopping",
 		RunningCustomCommandStatus: "running custom command",
+		RunningBulkCommandStatus:   "running bulk command",
 
 		RunningSubprocess:                          "running subprocess",
 		NoViewMachingNewLineFocusedSwitchStatement: "No view matching newLineFocused switch statement",
@@ -134,6 +138,7 @@ func englishSet() TranslationSet {
 		PruneImages:        "prune unused images",
 		ViewRestartOptions: "view restart options",
 		RunCustomCommand:   "run predefined custom command",
+		RunBulkCommand:     "view bulk commands",
 
 		AnonymousReportingTitle:  "Help make lazydocker better",
 		AnonymousReportingPrompt: "Would you like to enable anonymous reporting data to help improve lazydocker? (enter/esc)",
@@ -147,6 +152,7 @@ func englishSet() TranslationSet {
 		ImagesTitle:               "Images",
 		VolumesTitle:              "Volumes",
 		CustomCommandTitle:        "Custom Command:",
+		BulkCommandTitle:          "Bulk Command:",
 		ErrorTitle:                "Error",
 		LogsTitle:                 "Logs",
 		ConfigTitle:               "Config",

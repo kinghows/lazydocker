@@ -23,7 +23,7 @@ func (gui *Gui) getImageContextTitles() []string {
 	return []string{gui.Tr.ConfigTitle}
 }
 
-func (gui *Gui) getSelectedImage(g *gocui.Gui) (*commands.Image, error) {
+func (gui *Gui) getSelectedImage() (*commands.Image, error) {
 	selectedLine := gui.State.Panels.Images.SelectedLine
 	if selectedLine == -1 {
 		return &commands.Image{}, gui.Errors.ErrNoImages
@@ -41,7 +41,7 @@ func (gui *Gui) handleImagesClick(g *gocui.Gui, v *gocui.View) error {
 }
 
 func (gui *Gui) handleImageSelect(g *gocui.Gui, v *gocui.View) error {
-	Image, err := gui.getSelectedImage(g)
+	Image, err := gui.getSelectedImage()
 	if err != nil {
 		if err != gui.Errors.ErrNoImages {
 			return err
@@ -207,7 +207,7 @@ func (r *removeImageOption) GetDisplayStrings(isFocused bool) []string {
 }
 
 func (gui *Gui) handleImagesRemoveMenu(g *gocui.Gui, v *gocui.View) error {
-	Image, err := gui.getSelectedImage(g)
+	Image, err := gui.getSelectedImage()
 	if err != nil {
 		return nil
 	}
@@ -258,4 +258,19 @@ func (gui *Gui) handlePruneImages(g *gocui.Gui, v *gocui.View) error {
 			return gui.refreshImages()
 		})
 	}, nil)
+}
+
+func (gui *Gui) handleImagesCustomCommand(g *gocui.Gui, v *gocui.View) error {
+	image, err := gui.getSelectedImage()
+	if err != nil {
+		return nil
+	}
+
+	commandObject := gui.DockerCommand.NewCommandObject(commands.CommandObject{
+		Image: image,
+	})
+
+	customCommands := gui.Config.UserConfig.CustomCommands.Images
+
+	return gui.createCustomCommandMenu(customCommands, commandObject)
 }
