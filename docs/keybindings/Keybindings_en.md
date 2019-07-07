@@ -1,6 +1,6 @@
 # Lazydocker menu
 
-## Status
+## Project
 
 <pre>
   <kbd>e</kbd>: edit lazydocker config
@@ -23,6 +23,7 @@
   <kbd>D</kbd>: prune exited containers
   <kbd>m</kbd>: view logs
   <kbd>c</kbd>: run predefined custom command
+  <kbd>b</kbd>: view bulk commands
   <kbd>enter</kbd>: focus main panel
 </pre>
 
@@ -38,6 +39,7 @@
   <kbd>]</kbd>: next tab
   <kbd>R</kbd>: view restart options
   <kbd>c</kbd>: run predefined custom command
+  <kbd>b</kbd>: view bulk commands
   <kbd>enter</kbd>: focus main panel
 </pre>
 
@@ -47,7 +49,9 @@
   <kbd>[</kbd>: previous tab
   <kbd>]</kbd>: next tab
   <kbd>d</kbd>: remove image
+  <kbd>b</kbd>: view bulk commands
   <kbd>D</kbd>: prune unused images
+  <kbd>c</kbd>: run predefined custom command
   <kbd>enter</kbd>: focus main panel
 </pre>
 
@@ -58,6 +62,8 @@
   <kbd>]</kbd>: next tab
   <kbd>d</kbd>: remove volume
   <kbd>D</kbd>: prune unused volumes
+  <kbd>b</kbd>: view bulk commands
+  <kbd>c</kbd>: run predefined custom command
   <kbd>enter</kbd>: focus main panel
 </pre>
 
